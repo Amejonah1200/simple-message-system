@@ -1,10 +1,10 @@
 package ap.amejonah.simplemessagesystem;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Objects;
+import net.md_5.bungee.api.ChatColor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import static ap.amejonah.simplemessagesystem.SimpleMessageSystem.translateAlternateColorCodes;
+import java.util.Objects;
 
 public class SimpleMessage {
   
@@ -19,11 +19,11 @@ public class SimpleMessage {
    * @param defaultMessage The default message specified in the default configuration.
    * @param customMessage The custom message.
    */
-  public SimpleMessage(@Nonnull String path, @Nonnull String defaultMessage, @Nullable String customMessage) {
+  public SimpleMessage(@NotNull String path, @NotNull String defaultMessage, @Nullable String customMessage) {
     this.path = Objects.requireNonNull(path, "Path cannot be null!");
-    this.defaultMessage = translateAlternateColorCodes(
-        Objects.requireNonNull(defaultMessage, "DefaultMessage cannot be null!"));
-    this.customMessage = customMessage != null ? translateAlternateColorCodes(customMessage) : null;
+    this.defaultMessage = ChatColor
+        .translateAlternateColorCodes('&', Objects.requireNonNull(defaultMessage, "DefaultMessage cannot be null!"));
+    this.customMessage = customMessage != null ? ChatColor.translateAlternateColorCodes('&', customMessage) : null;
   }
   
   /**
@@ -32,7 +32,7 @@ public class SimpleMessage {
    * @param path the path in the configuration
    * @param defaultMessage the default message specified in the default configuration.
    */
-  public SimpleMessage(@Nonnull String path, @Nonnull String defaultMessage) {
+  public SimpleMessage(@NotNull String path, @NotNull String defaultMessage) {
     this(path, defaultMessage, null);
   }
   
@@ -41,7 +41,7 @@ public class SimpleMessage {
    *
    * @return the path
    */
-  @Nonnull
+  @NotNull
   public String getPath() {
     return path;
   }
@@ -51,7 +51,7 @@ public class SimpleMessage {
    *
    * @return the default message
    */
-  @Nonnull
+  @NotNull
   public String getDefaultMessage() {
     return defaultMessage;
   }
@@ -72,7 +72,7 @@ public class SimpleMessage {
    * @param customMessage the custom message to set
    */
   public void setCustomMessage(@Nullable String customMessage) {
-    this.customMessage = customMessage != null ? translateAlternateColorCodes(customMessage) : null;
+    this.customMessage = customMessage != null ? ChatColor.translateAlternateColorCodes('&', customMessage) : null;
   }
   
   /**
@@ -80,7 +80,7 @@ public class SimpleMessage {
    *
    * @return the raw message
    */
-  @Nonnull
+  @NotNull
   public String getRawMessage() {
     return customMessage != null ? customMessage : defaultMessage;
   }

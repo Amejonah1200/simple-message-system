@@ -1,12 +1,12 @@
 package ap.amejonah.simplemessagesystem;
 
-import org.apache.commons.lang.Validate;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.*;
 import java.util.*;
 
@@ -52,7 +52,7 @@ public class SimpleMessageSystem {
       synchronized (this.messages) {
         this.messages.clear();
         for (String path : internalMessages.getKeys(true)) {
-          if (path.endsWith("message")) {
+          if (path.endsWith(".message")) {
             path = path.substring(0, path.length() - 8);
             message = internalMessages.isString(path + ".message") ? internalMessages
                 .getString(path + ".message") : internalMessages.isList(path + ".message") ? String
@@ -74,12 +74,12 @@ public class SimpleMessageSystem {
    *
    * @param configuration the configuration
    */
-  public void loadCustomMessages(@Nonnull final ConfigurationSection configuration) {
+  public void loadCustomMessages(@NotNull final ConfigurationSection configuration) {
     Objects.requireNonNull(configuration, "Configuration cannot be null!");
     synchronized (this.messages) {
       this.messages.values().forEach(message -> {
         String s = configuration.getString(message.getPath());
-        message.setCustomMessage(s != null ? translateAlternateColorCodes(s) : null);
+        message.setCustomMessage(s != null ? ChatColor.translateAlternateColorCodes('&', s) : null);
       });
     }
   }
@@ -92,7 +92,7 @@ public class SimpleMessageSystem {
    *
    * @return if changed
    */
-  public boolean saveDefaultMessages(@Nonnull final ConfigurationSection configuration, boolean override) {
+  public boolean saveDefaultMessages(@NotNull final ConfigurationSection configuration, boolean override) {
     Objects.requireNonNull(configuration, "Configuration cannot be null!");
     boolean changed = false;
     synchronized (this.messages) {
@@ -114,8 +114,8 @@ public class SimpleMessageSystem {
    *
    * @return translated message
    */
-  @Nonnull
-  public String translate(@Nonnull String message, @Nullable Object... params) {
+  @NotNull
+  public String translate(@NotNull String message, @Nullable Object... params) {
     SimpleMessage simpleMessage;
     synchronized (messages) {
       simpleMessage = messages.get(Objects.requireNonNull(message, "Message cannot be null!"));
@@ -123,18 +123,5 @@ public class SimpleMessageSystem {
     if (simpleMessage == null) return message;
     if (simpleMessage instanceof PlaceholderMessage) return ((PlaceholderMessage) simpleMessage).translate(params);
     return simpleMessage.getRawMessage();
-  }
-  
-  @Nonnull
-  static String translateAlternateColorCodes(@Nonnull String textToTranslate) {
-    Validate.notNull(textToTranslate, "Cannot translate null text");
-    char[] b = textToTranslate.toCharArray();
-    for (int i = 0; i < b.length - 1; ++i) {
-      if (b[i] == '&' && "0123456789AaBbCcDdEeFfKkLlMmNnOoRrXx".indexOf(b[i + 1]) > -1) {
-        b[i] = 167;
-        b[i + 1] = Character.toLowerCase(b[i + 1]);
-      }
-    }
-    return new String(b);
   }
 }

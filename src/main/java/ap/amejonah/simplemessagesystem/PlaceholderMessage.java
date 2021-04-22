@@ -1,7 +1,9 @@
 package ap.amejonah.simplemessagesystem;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import net.md_5.bungee.api.ChatColor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,7 @@ public class PlaceholderMessage extends SimpleMessage {
    * @param defaultMessage The default message specified in the default configuration.
    * @param placeholders The placeholders.
    */
-  public PlaceholderMessage(@Nonnull String path, @Nonnull String defaultMessage, @Nullable String[] placeholders) {
+  public PlaceholderMessage(@NotNull String path, @NotNull String defaultMessage, @Nullable String[] placeholders) {
     super(path, defaultMessage);
     this.placeholders = placeholders;
     generateMessage();
@@ -35,7 +37,7 @@ public class PlaceholderMessage extends SimpleMessage {
    */
   @Override
   public void setCustomMessage(@Nullable String customMessage) {
-    customMessage = customMessage != null ? SimpleMessageSystem.translateAlternateColorCodes(customMessage) : null;
+    customMessage = customMessage != null ? ChatColor.translateAlternateColorCodes('&', customMessage) : null;
     if (Objects.equals(getDefaultMessage(), customMessage) || Objects.equals(getCustomMessage(), customMessage)) return;
     this.customMessage = customMessage;
     if (customMessage != null) generateMessage();
@@ -58,7 +60,7 @@ public class PlaceholderMessage extends SimpleMessage {
    *
    * @return The message in for of a list.
    */
-  @Nonnull
+  @NotNull
   private List<Object> split(String input) {
     List<Object> output = new LinkedList<>();
     List<String> placeholders = Arrays.stream(this.placeholders).collect(Collectors.toList());
@@ -70,7 +72,7 @@ public class PlaceholderMessage extends SimpleMessage {
       if (c == DELIMITER) {
         if (inside) {
           if ((id = placeholders.indexOf(temp.toString())) != -1) output.add(id);
-          else output.add("%" + temp.toString() + "%");
+          else output.add("%" + temp + "%");
         } else if (temp.length() > 0) output.add(temp.toString());
         temp = new StringBuilder();
         inside = !inside;
@@ -104,7 +106,7 @@ public class PlaceholderMessage extends SimpleMessage {
    *
    * @return The translated message.
    */
-  @Nonnull
+  @NotNull
   public String translate(@Nullable Object... params) {
     if (message == null || params == null || params.length == 0) return getRawMessage();
     StringBuilder output = new StringBuilder();
