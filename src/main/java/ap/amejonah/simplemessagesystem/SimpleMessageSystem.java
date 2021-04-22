@@ -52,7 +52,7 @@ public class SimpleMessageSystem {
       synchronized (this.messages) {
         this.messages.clear();
         for (String path : internalMessages.getKeys(true)) {
-          if (path.endsWith("message")) {
+          if (path.endsWith(".message")) {
             path = path.substring(0, path.length() - 8);
             message = internalMessages.isString(path + ".message") ? internalMessages
                 .getString(path + ".message") : internalMessages.isList(path + ".message") ? String
