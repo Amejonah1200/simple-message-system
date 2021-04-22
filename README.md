@@ -10,7 +10,7 @@ simpleMessageSystem = new SimpleMessageSystem(this); // loading defaults from te
 YamlConfiguration messages = YamlConfiguration.loadConfiguration(new File("plugins/MyPlugin/messages.yml"));
 simpleMessageSystem.loadCustomMessages(messages); // loads custom messages
 
-// this is 
+// this how to save defaults for unset paths
 if (simpleMessageSystem.saveDefaultMessages(messages, false)) { // returns true if defaults where set, the "false" is for not overriding
   try {
     messages.save("plugins/MyPlugin/messages.yml");
