@@ -31,7 +31,7 @@ public class PlaceholderMessage extends SimpleMessage {
   }
   
   /**
-   * Sets the custom message and generates the message array and translates color codes with "&" to "§".
+   * Sets the custom message and generates the message array and translates color codes with "&amp;" to "§".
    *
    * @param customMessage The new custom message.
    */

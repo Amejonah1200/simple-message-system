@@ -67,7 +67,7 @@ public class SimpleMessage {
   }
   
   /**
-   * Sets custom message and translates color codes with "&" to "§".
+   * Sets custom message and translates color codes with "&amp;" to "§".
    *
    * @param customMessage the custom message to set
    */

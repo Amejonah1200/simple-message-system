@@ -36,18 +36,33 @@ my:
   cool_cat: "Test"
   other:
     cool_cat:
-      message: "Cat n°%number% of %amount%." # Messages paths cannot ends with "message" like "my.cool_message"
+      message: "Cat n°%number% of %amount%."
       placeholders: ["number", "amount"] # order is relevant for providing args to translate-method!
 
 ```
 
-Gradle (ftw!!):
-```groovy
+Gradle Kotlin DSL:
+```kotlin
 repositories {
-    maven { url "https://jitpack.io" }
+  maven {
+    url = uri("https://eldonexus.de/repository/maven-releases")
+  }
 }
 
 dependencies {
-  implementation "io.github.amejonah:simple-message-system:1.0-stable"
+  implementation("io.github.amejonah1200", "simple-message-system", "1.0-stable")
 }
 ```
+Gradle Groovy DSL:
+```groovy
+repositories {
+  maven { url "https://eldonexus.de/repository/maven-releases" }
+}
+
+dependencies {
+  implementation "io.github.amejonah1200:simple-message-system:1.0-stable"
+}
+```
+
+Maven? Convert it for yourself. .-.
+
