@@ -1,6 +1,8 @@
 # simple-message-system
 ![Latest Version](https://img.shields.io/nexus/r/io.github.amejonah1200/simple-message-system?label=Release&nexusVersion=3&server=https%3A%2F%2Feldonexus.de&style=for-the-badge "Latest Version")
 
+Latest Javadocs: [here](https://amejonah1200.github.io/simple-message-system/)
+
 Usage:
 ```java
 private SimpleMessageSystem simpleMessageSystem;
