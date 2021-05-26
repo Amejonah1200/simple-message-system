@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ap.amejonah.simplemessagesystem","l":"PlaceholderMessage"},{"p":"ap.amejonah.simplemessagesystem","l":"SimpleMessage"},{"p":"ap.amejonah.simplemessagesystem","l":"SimpleMessageSystem"}]
