@@ -48,6 +48,7 @@ tasks {
   }
   javadoc {
     options.encoding = "UTF-8"
+    destinationDir?.resolve("../../../docs")?.let { setDestinationDir(it) }
   }
 }
 
