@@ -52,6 +52,13 @@ my:
     cool_cat: "Cat n°%number% of %amount%." # message and placeholders are redundant in the config file.
 ```
 (Adding `message` and `placeholder` in the config file would result as translation: `MemorySection[path='my.other.cool_cat', root='YamlConfiguration']`)
+
+
+
+
+
+**Adding to your project:**
+
 Gradle Kotlin DSL:
 ```kotlin
 repositories {
