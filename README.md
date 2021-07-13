@@ -34,7 +34,7 @@ String placeholded_message = simpleMessageSystem.translate("my.other.cool_cat", 
 
 // -- elsewhere --
 ```
-Messages Template:
+Messages Template (**in the jar file, the default messages.yml**):
 ```yml
 my:
   cool_cat: "Test"
@@ -44,7 +44,14 @@ my:
       placeholders: ["number", "amount"] # order is relevant for providing args to translate-method!
 
 ```
-
+messages.yml in the plugin folder (which is to configure, as server owners/devs/configurators):
+```yml
+my:
+  cool_cat: "Test"
+  other:
+    cool_cat: "Cat n°%number% of %amount%." # message and placeholders are redundant in the config file.
+```
+(Adding `message` and `placeholder` in the config file would result as translation: `MemorySection[path='my.other.cool_cat', root='YamlConfiguration']`)
 Gradle Kotlin DSL:
 ```kotlin
 repositories {
